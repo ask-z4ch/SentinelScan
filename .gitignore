@@ -1,0 +1,16 @@
+# Build
+sentinel.exe
+obj/
+
+# Reports
+report.csv
+
+# IDE
+.vs/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
