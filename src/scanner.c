@@ -12,6 +12,16 @@ typedef struct {
     INT Capacity;
 } DIRSTACK;
 
+BOOL IsTargetFile(PCSTR FileName)
+{
+    PCSTR Dot = strrchr(FileName, '.');
+    if (Dot == NULL) return FALSE;
+    if (_stricmp(Dot, ".exe") == 0) return TRUE;
+    if (_stricmp(Dot, ".dll") == 0) return TRUE;
+    if (_stricmp(Dot, ".msi") == 0) return TRUE;
+    return FALSE;
+}
+
 static BOOL is_target_ext(const WCHAR *Name)
 {
     const WCHAR *Dot = wcsrchr(Name, L'.');

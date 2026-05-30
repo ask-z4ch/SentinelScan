@@ -23,3 +23,5 @@ INT ScannerInit(PFILE_LIST List);
 VOID ScannerFree(PFILE_LIST List);
 
 INT ScannerScan(PCSTR RootPath, PFILE_LIST List);
+
+BOOL IsTargetFile(PCSTR FileName);
