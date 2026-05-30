@@ -3,17 +3,23 @@
 
 int main(int argc, char *argv[])
 {
-    FILE_LIST list;
+    PCSTR Root = argc > 1 ? argv[1] : ".";
+    FILE_LIST List;
 
-    if (argc > 1) {
-        printf("[INFO] Target directory: %s\n", argv[1]);
-    }
-
-    if (ScannerInit(&list) != 0) {
-        fprintf(stderr, "[ERROR] ScannerInit failed\n");
+    if (ScannerInit(&List) != 0) {
+        fprintf(stderr, "ScannerInit failed\n");
         return 1;
     }
-
-    ScannerFree(&list);
+    if (ScannerScan(Root, &List) != 0) {
+        fprintf(stderr, "ScannerScan failed\n");
+        ScannerFree(&List);
+        return 1;
+    }
+    for (INT i = 0; i < List.Count; i++) {
+        printf("%-30s %lu\n",
+            List.Files[i].FileName, List.Files[i].Size);
+    }
+    printf("Files found: %d\n", List.Count);
+    ScannerFree(&List);
     return 0;
 }
